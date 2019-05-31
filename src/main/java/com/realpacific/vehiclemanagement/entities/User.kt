@@ -1,32 +1,37 @@
 package com.realpacific.vehiclemanagement.entities
 
-import org.intellij.lang.annotations.RegExp
 import javax.persistence.*
 import javax.validation.constraints.Email
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
 @Entity
 @Table(name = "tbl_user")
 data class User constructor(
-        @Id
-        var id: String,
-
-        @Email
-        @Column(unique = true, nullable = false)
+        @field:Email
+        @field:NotBlank(message = "Email cannot be empty.")
+        @field:Column(unique = true)
         var email: String,
 
         var password: String,
 
-        @Column(nullable = false)
+        @field:NotBlank(message = "Name cannot be empty.")
         var name: String,
         var address: String,
 
 
-        @Column(unique = true, nullable = false)
-        @Size(min = 8)
-        @RegExp(prefix = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*\$")
+        @field:NotBlank(message = "Phone cannot be empty.")
+        @field:Column(unique = true)
+        @field:Size(min = 7, message = "Phone number must be valid.")
+        @field:Pattern(regexp = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*\$")
         var phone: String
 ) {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null
+
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     var vehicles: List<Vehicle> = mutableListOf()

@@ -27,7 +27,7 @@ class VehicleServiceTest {
 
     val vehicle1 = Vehicle("BA1CHA1234", "i10")
     val vehicle2 = Vehicle("BA1CHA1235", "i20")
-    val user = User("1234", "prashantbarahi@gmail.com", "password",
+    val user = User("prashantbarahi@gmail.com", "password",
             "Prashant Barahi", "Patan",
             "9849010616")
 

@@ -1,3 +1,5 @@
 package com.realpacific.vehiclemanagement.entities
 
-data class AuthenticateModel(val email: String, val password: String)
+data class AuthenticateModel(var email: String?, var password: String?) {
+    constructor(): this(null, null)
+}

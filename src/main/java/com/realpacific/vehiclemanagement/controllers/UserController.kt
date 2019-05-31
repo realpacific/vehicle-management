@@ -9,15 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
+import javax.validation.Valid
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 class UserController {
 
     @Autowired
     lateinit var userService: UserService
 
-    @PostMapping("/user")
-    fun createUser(@RequestBody user: User): ResponseEntity<BaseResponse<Nothing?>> {
+    @PostMapping("/user/signup")
+    fun createUser(@RequestBody @Valid user: User): ResponseEntity<BaseResponse<Nothing?>> {
         val newUser = userService.saveOneUser(user)
         val uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newUser.id).toUri()

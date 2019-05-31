@@ -3,6 +3,7 @@ package com.realpacific.vehiclemanagement.services.impl
 import com.realpacific.vehiclemanagement.entities.AuthenticateModel
 import com.realpacific.vehiclemanagement.entities.User
 import com.realpacific.vehiclemanagement.exceptions.AuthenticationException
+import com.realpacific.vehiclemanagement.exceptions.BadInputException
 import com.realpacific.vehiclemanagement.exceptions.UserNotFoundException
 import com.realpacific.vehiclemanagement.repositories.UserRepository
 import com.realpacific.vehiclemanagement.services.UserService
@@ -26,7 +27,10 @@ class UserServiceImpl : UserService {
     override fun getAllUsers(): List<User> = repository.findAll()
 
     override fun authenticateUser(authenticateModel: AuthenticateModel): User {
-        val result = repository.findUserByEmailAndPassword(authenticateModel.email, authenticateModel.password)
+        if (authenticateModel.email == null || authenticateModel.password == null) {
+            throw BadInputException()
+        }
+        val result = repository.findUserByEmailAndPassword(authenticateModel.email!!, authenticateModel.password!!)
         return result ?: throw AuthenticationException()
     }
 }

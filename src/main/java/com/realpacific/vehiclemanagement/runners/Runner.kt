@@ -35,7 +35,7 @@ class Runner : CommandLineRunner {
 
         val vehicle1 = Vehicle("BA1CHA1234", "i10")
         val vehicle2 = Vehicle("BA1CHA1235", "i20")
-        val user = User("1234", "prashantbarahi@gmail.com", "password",
+        val user = User("prashantbarahi@gmail.com", "password",
                 "Prashant Barahi", "Patan",
                 "9849010616")
 
@@ -45,7 +45,7 @@ class Runner : CommandLineRunner {
         val report1 = TimedReport(vehicle1, "Renew reminder", "Go to DOTM",
                 getPastDate(6), getFutureDate(1))
 
-        val report2 = DistanceReport(vehicle1, "Do servicing", "Servicing asap",
+        val report2 = ServicingReport(vehicle1, "Do servicing", "Servicing asap",
                 900000, 100000)
 
         userRepository.save(user)

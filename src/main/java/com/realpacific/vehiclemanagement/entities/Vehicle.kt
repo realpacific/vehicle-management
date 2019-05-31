@@ -12,11 +12,11 @@ import javax.validation.constraints.Size
 @Table(name = "tbl_vehicle")
 @JsonIgnoreProperties(value = ["user"])
 data class Vehicle constructor(
-        @Size(max = 15, min = 5, message = "Plate Number must be correct")
-        @Column(unique = true)
+        @field:Size(max = 15, min = 5, message = "Plate Number must be correct")
+        @field:Column(unique = true)
         var plateNo: String,
 
-        @Column(nullable = false)
+        @field:Column(nullable = false)
         var model: String
 ) {
     @Id
